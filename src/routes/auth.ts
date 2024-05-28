@@ -1,5 +1,7 @@
 import { Router } from "express";
 import { registerCtrl, loginCtrl } from "../controllers/auth.controller";
+import { ValidateRequest } from "../middlewares/validateRequest";
+import { userRegistrationSchema } from "../schemas/user.schema";
 
 const router = Router();
 
@@ -26,7 +28,7 @@ const router = Router();
  *          - bearerAuth: []
  */
 
-router.post("/register", registerCtrl);
+router.post("/register", ValidateRequest(userRegistrationSchema), registerCtrl);
 
 router.post("/login", loginCtrl);
 

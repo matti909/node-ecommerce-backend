@@ -1,11 +1,10 @@
-import { NextFunction, Response, Request, ErrorRequestHandler } from "express";
-import { z, ZodError } from "zod";
+import { NextFunction, Request, Response } from "express";
+import { ZodError, z } from "zod";
 
 const ValidateRequest = (schema: z.ZodObject<any, any>) => {
   return (req: Request, res: Response, next: NextFunction) => {
     try {
-      const result = schema.parse({ body: req.body });
-      console.log(result);
+      const result = schema.parse(req.body);
       next();
     } catch (error: any) {
       if (error instanceof ZodError) {

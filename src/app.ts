@@ -1,14 +1,14 @@
 import bodyParser from "body-parser";
 import cors from "cors";
 import "dotenv/config";
-import express from "express";
+import express, { Application } from "express";
 import morgan from "morgan";
 import swaggerUi from "swagger-ui-express";
 import dbConnect from "./config/mongo";
 import swagger from "./docs/swagger";
 import { router } from "./routes/";
 
-const app = express();
+const app: Application = express();
 const PORT = process.env.PORT || 4000;
 
 const options = {
@@ -26,3 +26,5 @@ dbConnect()
   .then(() => console.log("DB CONNECTION READY"))
   .catch((err) => console.error(err));
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+export default app;
